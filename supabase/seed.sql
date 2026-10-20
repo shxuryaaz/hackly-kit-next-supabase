@@ -1,0 +1,2 @@
+-- demo rows for tables that are not tied to a user. profiles come from sign ups, so nothing here yet.
+-- add inserts for your own tables below, e.g. insert into public.items (name) values ('first');
