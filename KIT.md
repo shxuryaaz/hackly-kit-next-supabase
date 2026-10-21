@@ -11,6 +11,12 @@ This repo is the `next-supabase` starter kit. Auth, the database client, session
 - `smoke.mjs`: `npm run smoke` builds and checks `/` returns 200.
 - env: `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`. Never commit `.env`.
 
+## the model: `ask()` from `lib/ai.ts`
+- Server code only (a server action or a route handler). `await ask({ text })` returns a string; add `schema` (json schema) to get parsed json; add `images` (data urls) or `audio` (base64 + format) for multimodal; `tier: "smart"` for the one hard step, cheap otherwise.
+- Never fetch api.openai.com yourself and never put a key in the repo. `HACKLY_AI_URL` and `HACKLY_AI_KEY` are in the env already.
+- When `ask()` throws an `AiOutError`, render `<AiOut/>` from `components/AiOut.tsx` where the answer would go. The rest of the page keeps working.
+- Calls cost the team's allowance; do not call the model in a loop over every row. One call per user action.
+
 ## where your code goes
 - Pages under `app/`. Replace `app/page.tsx` with the product's main screen. Keep the signed-out branch working: the page must render when there is no user.
 - Server actions next to the page (`app/<route>/actions.ts`, `"use server"` at the top).
